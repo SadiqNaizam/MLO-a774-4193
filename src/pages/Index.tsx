@@ -1,14 +1,53 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React from 'react';
+import MainAppLayout from '../components/layout/MainAppLayout';
+import StatsCardGrid from '../components/Dashboard/StatsCardGrid';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
-const Index = () => {
+const IndexPage: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <MainAppLayout pageTitle="Dashboard" activePath="/dashboard">
+      <div className="flex flex-col gap-6"> {/* Adheres to mainContent.container requirement */}
+        <Tabs defaultValue="leads" className="w-full">
+          <TabsList className="bg-transparent p-0 h-auto inline-flex"> {/* Custom TabsList styling to match image */} 
+            <TabsTrigger
+              value="sales"
+              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none transition-none"
+            >
+              Sales
+            </TabsTrigger>
+            <TabsTrigger
+              value="leads"
+              className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary data-[state=active]:text-primary data-[state=active]:border-b-2 data-[state=active]:border-primary rounded-none transition-none"
+            >
+              Leads
+            </TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="sales" className="mt-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-prd-primary-text">Sales Overview</CardTitle>
+                <CardDescription>
+                  Detailed sales performance metrics and reports.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-prd-secondary-text">
+                  Sales-specific statistics, charts, and key performance indicators (KPIs) related to revenue, closed deals, and sales team performance will be displayed in this section. 
+                  Currently, this content is a placeholder.
+                </p>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          
+          <TabsContent value="leads" className="mt-6">
+            <StatsCardGrid />
+          </TabsContent>
+        </Tabs>
       </div>
-    </div>
+    </MainAppLayout>
   );
 };
 
-export default Index;
+export default IndexPage;
